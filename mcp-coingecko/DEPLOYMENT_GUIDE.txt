@@ -1,0 +1,158 @@
+═══════════════════════════════════════════════════════════════════════════
+  DEPLOYMENT GUIDE - COINGECKO MCP SERVER TO DATABRICKS
+═══════════════════════════════════════════════════════════════════════════
+
+Follow these steps to deploy your CoinGecko MCP server to Databricks.
+
+─────────────────────────────────────────────────────────────────────────
+  STEP 1: PREREQUISITES
+─────────────────────────────────────────────────────────────────────────
+
+✓ Databricks workspace: https://adb-984752964297111.11.azuredatabricks.net/
+✓ Databricks CLI installed: pip install databricks-cli
+✓ CoinGecko API key (get from: https://www.coingecko.com/en/api)
+
+─────────────────────────────────────────────────────────────────────────
+  STEP 2: CONFIGURE DATABRICKS CLI
+─────────────────────────────────────────────────────────────────────────
+
+1. Authenticate with your workspace:
+
+   databricks configure --token
+
+2. When prompted:
+   - Host: https://adb-984752964297111.11.azuredatabricks.net/
+   - Token: [Generate personal access token from User Settings > Developer]
+
+3. Verify connection:
+
+   databricks workspace ls /
+
+─────────────────────────────────────────────────────────────────────────
+  STEP 3: SET UP API KEY IN DATABRICKS SECRETS
+─────────────────────────────────────────────────────────────────────────
+
+See API_KEY_SETUP.txt for detailed instructions.
+
+Quick version:
+
+1. Create scope:
+   databricks secrets create-scope coingecko
+
+2. Add API key:
+   databricks secrets put-secret coingecko api_key
+   [Paste your CoinGecko API key in the editor that opens]
+
+3. Verify:
+   databricks secrets list-secrets coingecko
+
+─────────────────────────────────────────────────────────────────────────
+  STEP 4: VALIDATE BUNDLE
+─────────────────────────────────────────────────────────────────────────
+
+From the mcp-coingecko directory:
+
+   databricks bundle validate
+
+Expected output: "Validation OK!"
+
+─────────────────────────────────────────────────────────────────────────
+  STEP 5: DEPLOY TO DATABRICKS
+─────────────────────────────────────────────────────────────────────────
+
+Deploy the MCP server:
+
+   databricks bundle deploy
+
+This will:
+- Upload source code to workspace
+- Create the Databricks App
+- Configure environment and dependencies
+- Start the MCP server
+
+Expected output: "Deployment complete!"
+
+─────────────────────────────────────────────────────────────────────────
+  STEP 6: VERIFY DEPLOYMENT
+─────────────────────────────────────────────────────────────────────────
+
+1. Check app status:
+   databricks apps list
+
+2. View app details:
+   databricks apps get mcp-coingecko
+
+3. Check logs (if needed):
+   databricks apps logs mcp-coingecko
+
+4. Get app URL:
+   databricks apps get mcp-coingecko --output json | grep url
+
+─────────────────────────────────────────────────────────────────────────
+  STEP 7: TEST IN DATABRICKS AI PLAYGROUND
+─────────────────────────────────────────────────────────────────────────
+
+1. Navigate to:
+   https://adb-984752964297111.11.azuredatabricks.net/ai-playground
+
+2. Click "Tools" or "Add MCP Server"
+
+3. Select "mcp-coingecko" from available apps
+
+4. Test with sample queries:
+   - "What's the current price of Bitcoin?"
+   - "Show me the top 10 cryptocurrencies by market cap"
+   - "Get 7-day price history for Ethereum"
+
+─────────────────────────────────────────────────────────────────────────
+  UPDATING THE SERVER
+─────────────────────────────────────────────────────────────────────────
+
+After making code changes:
+
+1. Re-validate:
+   databricks bundle validate
+
+2. Re-deploy:
+   databricks bundle deploy
+
+The app will be updated automatically.
+
+─────────────────────────────────────────────────────────────────────────
+  TROUBLESHOOTING
+─────────────────────────────────────────────────────────────────────────
+
+Issue: Bundle validation fails
+→ Check YAML syntax in databricks.yml and src/app.yaml
+→ Ensure workspace URL is correct
+
+Issue: Deployment fails with auth error
+→ Re-run: databricks configure --token
+→ Verify personal access token is valid
+
+Issue: App starts but returns API errors
+→ Verify secret is set: databricks secrets list-secrets coingecko
+→ Check API key is valid at CoinGecko dashboard
+→ Review logs: databricks apps logs mcp-coingecko
+
+Issue: Rate limit errors
+→ Free tier limited to 30 calls/min
+→ Consider implementing caching
+→ Upgrade to CoinGecko Pro for higher limits
+
+─────────────────────────────────────────────────────────────────────────
+  MONITORING & MAINTENANCE
+─────────────────────────────────────────────────────────────────────────
+
+Check app health:
+  databricks apps get mcp-coingecko
+
+View recent logs:
+  databricks apps logs mcp-coingecko --tail 100
+
+Restart app if needed:
+  databricks bundle deploy --force
+
+═══════════════════════════════════════════════════════════════════════════
+
+For more details, see README.md

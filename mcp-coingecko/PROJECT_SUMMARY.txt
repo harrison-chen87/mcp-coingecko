@@ -1,0 +1,180 @@
+═══════════════════════════════════════════════════════════════════════════
+  COINGECKO MCP SERVER - PROJECT SUMMARY
+═══════════════════════════════════════════════════════════════════════════
+
+Project: CoinGecko MCP Server for Databricks Apps
+Status: ✅ READY FOR DEPLOYMENT
+Workspace: https://adb-984752964297111.11.azuredatabricks.net/
+Workspace ID: 984752964297111
+
+─────────────────────────────────────────────────────────────────────────
+  PROJECT STRUCTURE
+─────────────────────────────────────────────────────────────────────────
+
+mcp-coingecko/
+├── .gitignore                  # Git ignore rules (protects secrets)
+├── databricks.yml              # Databricks Asset Bundle config
+├── API_KEY_SETUP.txt           # Step-by-step API key setup guide
+├── DEPLOYMENT_GUIDE.txt        # Complete deployment instructions
+├── README.md                   # Full project documentation
+└── src/
+    ├── app.yaml                # Databricks Apps runtime config
+    ├── requirements.txt        # Python dependencies
+    ├── coingecko_tools.py      # CoinGecko API wrapper (7 methods)
+    └── server.py               # MCP server with 6 tools
+
+─────────────────────────────────────────────────────────────────────────
+  IMPLEMENTED FEATURES
+─────────────────────────────────────────────────────────────────────────
+
+✅ 6 MCP Tools Available:
+
+1. get_coin_price          - Real-time cryptocurrency prices
+2. get_market_data         - Market cap, volume, rankings
+3. get_historical_data     - Historical price charts
+4. search_coins            - Search by name/symbol
+5. get_trending_coins      - Currently trending cryptos
+6. get_coin_details        - Detailed coin information
+
+✅ CoinGecko API Integration:
+   - Free tier support (30 calls/min)
+   - Async HTTP client with proper error handling
+   - Rate limit awareness
+   - Multi-currency support
+
+✅ Databricks Configuration:
+   - Asset Bundle ready for deployment
+   - Secure secrets management
+   - Environment variable configuration
+   - Port 8000 default (configurable)
+
+─────────────────────────────────────────────────────────────────────────
+  QUICK START
+─────────────────────────────────────────────────────────────────────────
+
+1. Set up API key (see API_KEY_SETUP.txt):
+   databricks secrets create-scope coingecko
+   databricks secrets put-secret coingecko api_key
+
+2. Deploy to Databricks:
+   databricks bundle validate
+   databricks bundle deploy
+
+3. Test in AI Playground:
+   Navigate to: https://adb-984752964297111.11.azuredatabricks.net/ai-playground
+   Add tool: mcp-coingecko
+   Try: "What's the current price of Bitcoin?"
+
+─────────────────────────────────────────────────────────────────────────
+  TECHNICAL DETAILS
+─────────────────────────────────────────────────────────────────────────
+
+Framework:        Model Context Protocol (MCP)
+Transport:        Server-Sent Events (SSE)
+Language:         Python 3.10+
+Key Dependencies: mcp, httpx, pydantic
+API Version:      CoinGecko API v3
+Rate Limits:      30 calls/min (free tier)
+
+Security:
+- API keys stored in Databricks secrets
+- No hardcoded credentials
+- .gitignore protects sensitive files
+- Secret reference via {{secrets/coingecko/api_key}}
+
+─────────────────────────────────────────────────────────────────────────
+  DEPLOYMENT CHECKLIST
+─────────────────────────────────────────────────────────────────────────
+
+□ Install Databricks CLI: pip install databricks-cli
+□ Configure authentication: databricks configure --token
+□ Get CoinGecko API key from: https://www.coingecko.com/en/api
+□ Create secret scope: databricks secrets create-scope coingecko
+□ Add API key: databricks secrets put-secret coingecko api_key
+□ Validate bundle: databricks bundle validate
+□ Deploy app: databricks bundle deploy
+□ Test in AI Playground
+
+─────────────────────────────────────────────────────────────────────────
+  EXAMPLE QUERIES FOR AI PLAYGROUND
+─────────────────────────────────────────────────────────────────────────
+
+Basic Queries:
+- "What's the current price of Bitcoin in USD?"
+- "Show me Ethereum's price in EUR and GBP"
+- "Get the current price of Bitcoin, Ethereum, and Cardano"
+
+Market Analysis:
+- "Show me the top 10 cryptocurrencies by market cap"
+- "What are the top 5 cryptos by trading volume?"
+- "Compare Bitcoin and Ethereum market data"
+
+Historical Data:
+- "Get Bitcoin's 30-day price history"
+- "Show me Ethereum's price chart for the last 90 days"
+- "What was Cardano's price trend over the past week?"
+
+Discovery:
+- "Search for all layer 2 cryptocurrencies"
+- "What are the trending cryptocurrencies right now?"
+- "Find information about Solana"
+- "Get detailed information about Polygon"
+
+─────────────────────────────────────────────────────────────────────────
+  FILES REFERENCE
+─────────────────────────────────────────────────────────────────────────
+
+README.md              → Comprehensive project documentation
+API_KEY_SETUP.txt      → Databricks secrets setup (2 methods)
+DEPLOYMENT_GUIDE.txt   → Step-by-step deployment process
+databricks.yml         → Asset bundle configuration
+src/app.yaml           → App runtime configuration
+src/server.py          → MCP server implementation
+src/coingecko_tools.py → CoinGecko API client
+src/requirements.txt   → Python dependencies
+
+─────────────────────────────────────────────────────────────────────────
+  TROUBLESHOOTING QUICK REFERENCE
+─────────────────────────────────────────────────────────────────────────
+
+Issue: Bundle validation fails
+→ databricks bundle validate
+→ Check YAML syntax
+
+Issue: Deployment auth error
+→ databricks configure --token
+→ Verify token is valid
+
+Issue: API errors at runtime
+→ databricks secrets list-secrets coingecko
+→ Check API key is set correctly
+→ databricks apps logs mcp-coingecko
+
+Issue: Rate limit errors
+→ Free tier: 30 calls/min
+→ Implement caching or upgrade to Pro
+
+─────────────────────────────────────────────────────────────────────────
+  NEXT STEPS
+─────────────────────────────────────────────────────────────────────────
+
+1. Follow DEPLOYMENT_GUIDE.txt for step-by-step deployment
+2. Set up your CoinGecko API key using API_KEY_SETUP.txt
+3. Deploy to Databricks and test in AI Playground
+4. Explore the 6 available tools with sample queries
+5. (Optional) Extend with additional CoinGecko endpoints
+
+─────────────────────────────────────────────────────────────────────────
+  RESOURCES
+─────────────────────────────────────────────────────────────────────────
+
+CoinGecko API:    https://docs.coingecko.com/
+MCP Protocol:     https://modelcontextprotocol.io/
+Databricks Apps:  https://docs.databricks.com/en/dev-tools/apps/
+Asset Bundles:    https://docs.databricks.com/en/dev-tools/bundles/
+
+═══════════════════════════════════════════════════════════════════════════
+
+🚀 Your CoinGecko MCP server is ready to deploy!
+
+Follow the DEPLOYMENT_GUIDE.txt to get started.

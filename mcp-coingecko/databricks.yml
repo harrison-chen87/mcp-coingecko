@@ -1,0 +1,12 @@
+bundle:
+  name: mcp-coingecko
+
+workspace:
+  host: https://adb-984752964297111.11.azuredatabricks.net/
+
+resources:
+  apps:
+    mcp-coingecko:
+      name: mcp-coingecko
+      description: "CoinGecko MCP Server - Cryptocurrency price and market data"
+      source_code_path: ./src
