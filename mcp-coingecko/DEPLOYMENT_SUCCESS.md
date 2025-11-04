@@ -7,7 +7,7 @@
 - **App Status**: RUNNING
 - **Deployment Status**: SUCCEEDED
 - **Compute Status**: ACTIVE
-- **App URL**: https://mcp-coingecko-984752964297111.11.azure.databricksapps.com
+- **App URL**: https://mcp-coingecko-<your-workspace-id>.11.azure.databricksapps.com
 
 ## Key Implementation Details
 
@@ -45,13 +45,13 @@ uvicorn>=0.30.0
 
 ## Testing in Databricks AI Playground
 
-1. Navigate to: https://adb-984752964297111.11.azuredatabricks.net/ai-playground
+1. Navigate to: https://<your-workspace-url>.azuredatabricks.net/ai-playground
 
 2. Click "Add Tools" or "Connect MCP Server"
 
 3. Select `mcp-coingecko` from the list
 
-4. The MCP endpoint is: `https://mcp-coingecko-984752964297111.11.azure.databricksapps.com/api/mcp/`
+4. The MCP endpoint is: `https://mcp-coingecko-<your-workspace-id>.11.azure.databricksapps.com/api/mcp/`
 
 5. Try sample queries:
    - "What's the current price of Bitcoin?"

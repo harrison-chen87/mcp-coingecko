@@ -8,7 +8,7 @@ Follow these steps to deploy your CoinGecko MCP server to Databricks.
   STEP 1: PREREQUISITES
 ─────────────────────────────────────────────────────────────────────────
 
-✓ Databricks workspace: https://adb-984752964297111.11.azuredatabricks.net/
+✓ Databricks workspace: https://<your-workspace-url>.azuredatabricks.net/
 ✓ Databricks CLI installed: pip install databricks-cli
 ✓ CoinGecko API key (get from: https://www.coingecko.com/en/api)
 
@@ -21,7 +21,7 @@ Follow these steps to deploy your CoinGecko MCP server to Databricks.
    databricks configure --token
 
 2. When prompted:
-   - Host: https://adb-984752964297111.11.azuredatabricks.net/
+   - Host: https://<your-workspace-url>.azuredatabricks.net/
    - Token: [Generate personal access token from User Settings > Developer]
 
 3. Verify connection:
@@ -93,7 +93,7 @@ Expected output: "Deployment complete!"
 ─────────────────────────────────────────────────────────────────────────
 
 1. Navigate to:
-   https://adb-984752964297111.11.azuredatabricks.net/ai-playground
+   https://<your-workspace-url>.azuredatabricks.net/ai-playground
 
 2. Click "Tools" or "Add MCP Server"
 

@@ -16,7 +16,7 @@ Follow these steps to securely add your CoinGecko API key to Databricks:
 
    databricks configure --token
 
-   Enter workspace URL: https://adb-984752964297111.11.azuredatabricks.net/
+   Enter workspace URL: https://<your-workspace-url>.azuredatabricks.net/
    Enter your personal access token when prompted
 
 3. Create a secret scope:
@@ -38,7 +38,7 @@ Follow these steps to securely add your CoinGecko API key to Databricks:
 ─────────────────────────────────────────────────────────────────────────
 
 1. Navigate to your workspace:
-   https://adb-984752964297111.11.azuredatabricks.net/
+   https://<your-workspace-url>.azuredatabricks.net/
 
 2. In the left sidebar, click "Settings" (gear icon)
 
@@ -48,7 +48,7 @@ Follow these steps to securely add your CoinGecko API key to Databricks:
 
 5. Under "Access tokens", click "Manage" next to "Secret Scopes"
    OR directly navigate to:
-   https://adb-984752964297111.11.azuredatabricks.net/#secrets/createScope
+   https://<your-workspace-url>.azuredatabricks.net/#secrets/createScope
 
 6. Create a new scope:
    - Scope name: coingecko

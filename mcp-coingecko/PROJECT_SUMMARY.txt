@@ -4,8 +4,8 @@
 
 Project: CoinGecko MCP Server for Databricks Apps
 Status: ✅ READY FOR DEPLOYMENT
-Workspace: https://adb-984752964297111.11.azuredatabricks.net/
-Workspace ID: 984752964297111
+Workspace: https://<your-workspace-url>.azuredatabricks.net/
+Workspace ID: <your-workspace-id>
 
 ─────────────────────────────────────────────────────────────────────────
   PROJECT STRUCTURE
@@ -61,7 +61,7 @@ mcp-coingecko/
    databricks bundle deploy
 
 3. Test in AI Playground:
-   Navigate to: https://adb-984752964297111.11.azuredatabricks.net/ai-playground
+   Navigate to: https://<your-workspace-url>.azuredatabricks.net/ai-playground
    Add tool: mcp-coingecko
    Try: "What's the current price of Bitcoin?"
 

@@ -252,5 +252,5 @@ For issues related to:
 
 ---
 
-**Workspace:** https://adb-984752964297111.11.azuredatabricks.net/
-**Workspace ID:** 984752964297111
+**Workspace:** https://<your-workspace-url>.azuredatabricks.net/
+**Workspace ID:** <your-workspace-id>

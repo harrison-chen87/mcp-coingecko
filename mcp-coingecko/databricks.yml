@@ -2,7 +2,7 @@ bundle:
   name: mcp-coingecko
 
 workspace:
-  host: https://adb-984752964297111.11.azuredatabricks.net/
+  host: https://<your-workspace-url>.azuredatabricks.net/
 
 resources:
   apps:
